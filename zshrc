@@ -130,3 +130,6 @@ trash (){
 # alias to execute my shell script
 alias gmf='sh /Users/Jason/myshellscript/gmf.sh'
 alias ows='sh /Users/Jason/myshellscript/lazyshellscript/website.sh'
+
+# generate, upload and back up hexo blog
+alias ubh='hexo generate && hexo deploy && hexo backup'
