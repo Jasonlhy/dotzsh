@@ -129,7 +129,7 @@ mergefile (){
 # ken siu       , thomas lee    ,  ivan ng
 tabular (){
     trick_letter='>'
-    sed_argument="s/\([^ $1]*\),\([^ $1]*\)/\1 $trick_letter$1 \2/g"
+    sed_argument="s/\([^$1]*\) *$1 *\([^$1]*\)/\1 $trick_letter$1 \2/g"
     sed $sed_argument | column -t -s $trick_letter
 }
 
