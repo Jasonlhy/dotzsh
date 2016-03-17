@@ -124,9 +124,9 @@ mergefile (){
 
 # tabular the columns using delimator of one charcter
 # Example:
-# echo 'liu hoyin  ,fung kaho  ,tommy leung \nken siu,thomas lee, ivan ng' | tabular ','
-# liu hoyin     , fung kaho     , tommy leung 
-# ken siu       , thomas lee    ,  ivan ng
+# echo 'messi ,ronaldo  ,david beckham \nwayne ronny,ozil, neymer ' | tabular ','
+# messi         , ronaldo     , david beckham 
+# wayne ronny   , ozil        , neymer 
 tabular (){
     trick_letter='>'
     sed_argument="s/\([^$1]*\) *$1 *\([^$1]*\)/\1 $trick_letter$1 \2/g"
