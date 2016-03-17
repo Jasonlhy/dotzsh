@@ -54,6 +54,7 @@ plugins=(git)
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+PATH="$PATH:~/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -121,9 +122,37 @@ mergefile (){
     done
 }
 
+# tabular the columns using delimator of one charcter
+# Example:
+# echo 'liu hoyin  ,fung kaho  ,tommy leung \nken siu,thomas lee, ivan ng' | tabular ','
+# liu hoyin     , fung kaho     , tommy leung 
+# ken siu       , thomas lee    ,  ivan ng
+tabular (){
+    trick_letter='>'
+    sed_argument="s/\([^ $1]*\),\([^ $1]*\)/\1 $trick_letter$1 \2/g"
+    sed $sed_argument | column -t -s $trick_letter
+}
+
 # safe remove but removing them to the trash instead of deleting completely
 trash (){
     mv "$1" ~/.Trash
+}
+
+# Check the content of text file and decide to remove or not
+checktxt (){
+    for f in `ls`; do
+        if [ ! -d "$f" ]; then
+            if file "$f" | grep -q "text" ; then
+                echo "/* *********************************"
+                echo " * $f"
+                echo " * *********************************/"
+                cat "$f" | less
+                rm "-i" $f
+                echo ""
+                echo ""
+            fi
+        fi
+    done
 }
 
 
@@ -133,3 +162,5 @@ alias ows='sh /Users/Jason/myshellscript/lazyshellscript/website.sh'
 
 # generate, upload and back up hexo blog
 alias ubh='hexo generate && hexo deploy && hexo backup'
+
+PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
