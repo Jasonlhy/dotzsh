@@ -5,7 +5,8 @@ export ZSH=/Users/Jason/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+ZSH_THEME="ys"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,7 +50,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git colored-man-pages copydir)
 
 # User configuration
 
@@ -163,4 +164,14 @@ alias ows='sh /Users/Jason/myshellscript/lazyshellscript/website.sh'
 # generate, upload and back up hexo blog
 alias ubh='hexo generate && hexo deploy && hexo backup'
 
+# Reload Zsh Config
+alias rzc='source ~/.zshrc'
+
+# Back directory
+alias bd='cd ../'
+# Next directory
+alias nd='cd -'
+
 PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+PATH="$PATH:/Library/TeX/texbin" # pandoc pdf writer
