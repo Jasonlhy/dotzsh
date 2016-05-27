@@ -134,6 +134,35 @@ tabular (){
     sed $sed_argument | column -t -s $trick_letter
 }
 
+# Add number at the start of each line
+# `expand` is to convert tab into space.....
+# becasue format of the `cat` output like this
+#    1	create the peer server
+#    2	cwtf is going on
+#
+# first "whitespace" is apce, second "whitespace" is tab
+# Input:
+# create the peer server
+# cwtf is going on
+# 
+# Output:
+# 1. create the peer server
+# 2. cwtf is going on
+addNumber (){
+    cat -n | expand | sed -E "s/([ ]+)([1-9]+)([ ]+)(.*)/\2\. \4/g"
+}
+
+# remove number in this format: xxx1xxxxx.*xxxxDDDD where xxxx can be empty and DDD is what we want
+# " 2. BC" => "BC"
+removeNumber (){
+    expand | sed "s/\([0-9][0-9]*\) *\.* *\(.*\)/\2/g"  
+}
+
+# Upper case of first english letter in each line
+firstUpperCase (){
+    sed "s/\(^[^a-zA-Z]*\)[aA]/\1A/g;s/\(^[^a-zA-Z]*\)[bB]/\1B/g;s/\(^[^a-zA-Z]*\)[cC]/\1C/g;s/\(^[^a-zA-Z]*\)[dD]/\1D/g;s/\(^[^a-zA-Z]*\)[eE]/\1E/g;s/\(^[^a-zA-Z]*\)[fF]/\1F/g;s/\(^[^a-zA-Z]*\)[gG]/\1G/g;s/\(^[^a-zA-Z]*\)[hH]/\1H/g;s/\(^[^a-zA-Z]*\)[iI]/\1I/g;s/\(^[^a-zA-Z]*\)j/[jJ\1]/g;s/\(^[^a-zA-Z]*\)[kK]/\1K/g;s/\(^[^a-zA-Z]*\)[lL]/\1L/g;s/\(^[^a-zA-Z]*\)[mM]/\1M/g;s/\(^[^a-zA-Z]*\)[nN]/\1N/g;s/\(^[^a-zA-Z]*\)[oO]/\1O/g;s/\(^[^a-zA-Z]*\)[pP]/\1P/g;s/\(^[^a-zA-Z]*\)[qQ]/\1Q/g;s/\(^[^a-zA-Z]*\)[rR]/\1R/g;s/\(^[^a-zA-Z]*\)[sS]/\1S/g;s/\(^[^a-zA-Z]*\)[tT]/\1T/g;s/\(^[^a-zA-Z]*\)[uU]/\1U/g;s/\(^[^a-zA-Z]*\)[vV]/\1V/g;s/\(^[^a-zA-Z]*\)[wW]/\1W/g;s/\(^[^a-zA-Z]*\)[xX]/\1X/g;s/\(^[^a-zA-Z]*\)[yY]/\1Y/g;s/\(^[^a-zA-Z]*\)[zZ]/\1Z/g"
+}
+
 # safe remove but removing them to the trash instead of deleting completely
 trash (){
     mv "$1" ~/.Trash
